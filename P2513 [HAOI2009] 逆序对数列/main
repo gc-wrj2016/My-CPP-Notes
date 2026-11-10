@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+// #define int long long
+using namespace std;
+const int N=1e3+5,MOD=10000;
+int dp[N][N];
+signed main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n,k;
+    cin>>n>>k;
+    dp[1][0]=1;
+    for(int i=2;i<=n;i++)
+    {
+        int sum=0;
+        for(int j=0;j<=k;j++)
+        {
+            sum=(sum+dp[i-1][j])%MOD;
+            dp[i][j]=sum;
+            if(j-i+1>=0)sum-=dp[i-1][j-i+1],sum%=MOD,sum+=MOD,sum%+MOD;
+        }
+    }
+    cout<<dp[n][k];
+    return 0;
+}

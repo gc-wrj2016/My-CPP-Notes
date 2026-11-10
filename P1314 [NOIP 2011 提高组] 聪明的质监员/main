@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+#define int long long
+using namespace std;
+const int N=2e5+5;
+int w[N],v[N],L[N],R[N],s,n,m,y;
+bool check(int x)
+{
+	int sum1[N]={},sum2[N]={};
+    for(int i=1;i<=n;i++)
+    {
+        if(w[i]>x)sum1[i]=sum1[i-1]+1,sum2[i]=sum2[i-1]+v[i];
+		else sum1[i]=sum1[i-1],sum2[i]=sum2[i-1];
+    }
+	y=0;
+    for(int i=1;i<=m;i++)
+	{
+		y+=(sum1[R[i]]-sum1[L[i]-1])*(sum2[R[i]]-sum2[L[i]-1]);
+	}
+	return y>s;
+}
+signed main()
+{
+    cin>>n>>m>>s;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>w[i]>>v[i];
+    }
+	for(int i=1;i<=m;i++)
+	{
+		cin>>L[i]>>R[i];
+	}
+    int l=0,r=1e6+5;
+	int ans=1e18;
+    while(l+1<r)
+    {
+        int mid=(l+r)>>1;
+        if(check(mid))
+        {
+            l=mid;
+			ans=min(ans,llabs(y-s));
+        }
+        else r=mid,ans=min(ans,llabs(y-s));
+    }
+	cout<<ans;
+	return 0;
+}

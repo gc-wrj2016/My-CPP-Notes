@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+vector<int> Add(vector<int>a,vector<int>b)
+{
+    vector<int>c;
+    int len=max(a.size(),b.size());
+    int d=0;
+    for(int i=0;i<len;i++)
+    {
+        if(a.size()>i)d+=a[i];
+        if(b.size()>i)d+=b[i];
+        c.push_back(d%10);
+        d/=10;
+    }
+    if(d)c.push_back(d);
+    return c;
+}
+inline void ans()
+{
+    int n;
+    cin>>n;
+    vector<int>a,b,c;
+    a={1},b={2};
+    if(n==1){cout<<1<<endl;return ;}
+    else if(n==2){cout<<2<<endl;return ;}
+    for(int i=3;i<=n;i++)
+    {
+        c=Add(a,b);
+        a=b,b=c;
+    }
+    for(int i=c.size()-1;i>=0;i--)cout<<c[i];
+    cout<<endl;
+}
+signed main()
+{
+    int T=1;
+    while(T--)ans();
+}

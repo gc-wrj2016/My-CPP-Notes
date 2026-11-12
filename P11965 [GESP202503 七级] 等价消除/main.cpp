@@ -6,9 +6,9 @@ inline void run()
     int n;cin>>n;
     string s;cin>>s;
     int mark=0;
-    unordered_map<int,int>count;
+    unordered_map<int,ll>count;
     count[0]=1;
-    int ans=0;
+    ll ans=0;
     for(auto c:s)
     {
         int bit=c-'0';
